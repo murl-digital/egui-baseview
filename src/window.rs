@@ -309,6 +309,10 @@ where
             }
         }
 
+        if cfg!(not(target_os = "linux")) && self.egui_ctx.wants_keyboard_input() && !window.has_focus() {
+            window.focus()
+        }
+
         let now = Instant::now();
         let do_repaint_now = if let Some(t) = self.repaint_after {
             now >= t || viewport_output.repaint_delay.is_zero()
